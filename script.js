@@ -2,9 +2,12 @@ function q (selector){
     return document.querySelector(selector)
 }
 
+function qs(selector){
+    return document.querySelectorAll(selector)
+}
+
 
 function markValid (field) {
-    // clearError(field)
     field.classList.remove("input-invalid")
     field.classList.add("input-valid")
 }
@@ -21,19 +24,23 @@ function markInvalid (field, errorMsg) {
     }
 }
 
-// function clearError (field) {
-//     const fieldContainer = field.parentNode
-//     for (let msg of fieldContainer.querySelectorAll(.error.message)){ msg.remove}
-// }
-
+function clearMsg () {
+    let errorKids = qs(".text-danger")
+    for (let i = 0; i < errorKids.length; i++){
+        errorKids[i].remove()
+    }
+}
 
 q('#parking-form').addEventListener('submit', function(event) {
     event.preventDefault()
+
+    clearMsg()
+
     let nameField= q('#name-field')
     let nameInput=q("#name").value
 
     if (!nameInput) {
-        markInvalid(nameField,'Oops! Please add name.')
+        markInvalid(nameField,'Oops! Name Required.')
     } else {
         markValid(nameField)
     }  
