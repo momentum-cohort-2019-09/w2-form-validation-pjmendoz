@@ -2,28 +2,42 @@ function q (selector){
     return document.querySelector(selector)
 }
 
-function markValid (field){
-    field.parentNode.classList.remove("input-invalid")
-    field.parentNode.classList.add("input-valid")
-}
+function validateInput(input) {
+    return (input) !== ""
+    }
 
-function markInvalid (field){
-    field.parentNode.classList.remove("input-valid")
-    field.parentNode.classList.add("input-invalid")
-}    
+Function Main() {
+    q('#parking-form').addEventListener('submit', function(event) {
+        event.preventDefault()
 
-function main () {
-q('#parking-form').addEventListener('submit', function(event) {
-    event.preventDefault()
-    let nameField= q('.input-field')
-    let name= nameField.value.trim
+        function Name() {
+            let nameField= q('#name-field')
+            let nameInput=q("#name")
+            let name= nameInput.value
 
-    if (!name) {
-        markInvalid(nameField)
-    } else {
-        markValid(nameField)
-    }   
-    
-})
+            if (!name) {
+                nameField.classList.remove("input-valid")
+                nameField.classList.add("input-invalid")
+            } else {
+                nameField.classList.remove("input-invalid")
+                nameField.classList.add("input-valid")
+            }
+        }
+        
+        function date() {
+            let dateField= q('#start-date-field')
+            let dateInput= q('#start-date')
+            let date= dateInput.value
+
+            if () {
+                dateField.classList.remove("input-valid")
+                dateField.classList.add("input-invalid")
+            }   else {
+                dateField.classList.remove("input-invalid")
+                dateField.classList.add("input-valid")
+            }
+        }
+        
+    })
 }
 
