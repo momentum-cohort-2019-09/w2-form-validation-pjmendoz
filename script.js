@@ -2,83 +2,101 @@ function q (selector){
     return document.querySelector(selector)
 }
 
-function validateInput(input) {
-    return (input) !== ""
+
+function markValid (field) {
+    // clearError(field)
+    field.classList.remove("input-invalid")
+    field.classList.add("input-valid")
+}
+
+function markInvalid (field, errorMsg) {
+    field.classList.remove("input-valid")
+    field.classList.add("input-invalid")
+    
+    if (errorMsg) {
+        const errorPara = document.createElement('p')
+        errorPara.classList.add('input-hint', 'text-danger', 'error-message')
+        errorPara.innerText= errorMsg
+        field.appendChild(errorPara)
     }
+}
+
+// function clearError (field) {
+//     const fieldContainer = field.parentNode
+//     for (let msg of fieldContainer.querySelectorAll(.error.message)){ msg.remove}
+// }
 
 
 q('#parking-form').addEventListener('submit', function(event) {
     event.preventDefault()
     let nameField= q('#name-field')
-    let nameInput=q("#name")
-    let name= nameInput.value
+    let nameInput=q("#name").value
 
-    if (!name) {
-        nameField.classList.remove("input-valid")
-        nameField.classList.add("input-invalid")
+    if (!nameInput) {
+        markInvalid(nameField,'Oops! Please add name.')
     } else {
-        nameField.classList.remove("input-invalid")
-        nameField.classList.add("input-valid")
-    }   
+        markValid(nameField)
+    }  
+
+    let carField= q('#car-field')
+    let carInput1=q("#car-year").value
+    let carInput2=q('#car-make').value
+    let carInput3=q('#car-model').value
+    
+
+    if (!carInput1 || !carInput2 || !carInput3) {
+        markInvalid(carField, 'Oops! Please fill blanks.')
+    } else {
+        markValid(carField)
+    }
 
     let dateField= q('#start-date-field')
     let dateInput=q("#start-date")
     let date= dateInput.value
 
     if (!date) {
-        dateField.classList.remove("input-valid")
-        dateField.classList.add("input-invalid")
+        markInvalid(dateField, 'Oops! Please fill in the date.')
     } else {
-        dateField.classList.remove("input-invalid")
-        dateField.classList.add("input-valid")
-    } 
+        markValid(dateField)
+    }
 
     let daysField= q('#days-field')
     let daysInput=q("#days")
     let days= daysInput.value
 
     if (!days) {
-        daysField.classList.remove("input-valid")
-        daysField.classList.add("input-invalid")
+        markInvalid(daysField, 'Oops! Please fill in the number of days.')
     } else {
-        daysField.classList.remove("input-invalid")
-        daysField.classList.add("input-valid")
-    } 
+        markValid(daysField)
+    }
 
     let ccField= q('#credit-card-field')
     let ccInput=q("#credit-card")
     let cc= ccInput.value
 
     if (!cc) {
-        ccField.classList.remove("input-valid")
-        ccField.classList.add("input-invalid")
+        markInvalid(ccField, 'Oops! Please fill in a valid Credit Card number.')
     } else {
-        ccField.classList.remove("input-invalid")
-        ccField.classList.add("input-valid")
-    } 
+        markValid(ccField)
+    }
 
     let cvvField= q('#cvv-field')
     let cvvInput=q("#cvv")
     let cvv= cvvInput.value
 
     if (!cvv) {
-        cvvField.classList.remove("input-valid")
-        cvvField.classList.add("input-invalid")
+        markInvalid(cvvField, 'Oops! Please fill in a valid CVV.')
     } else {
-        cvvField.classList.remove("input-invalid")
-        cvvField.classList.add("input-valid")
-    } 
+        markValid(cvvField)
+    }
 
     let expirationField= q('#expiration-field')
     let expirationInput=q("#expiration")
     let expiration= expirationInput.value
 
     if (!expiration) {
-        expirationField.classList.remove("input-valid")
-        expirationField.classList.add("input-invalid")
+        markInvalid(expirationField, 'Oops! Please fill in the expiration date.')
     } else {
-        expirationField.classList.remove("input-invalid")
-        expirationField.classList.add("input-valid")
-    }     
-})
-
+        markValid(expirationField)
+    }
+}) 
