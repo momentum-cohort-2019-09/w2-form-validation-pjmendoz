@@ -54,6 +54,13 @@ function luhnCheck(val) {
     return (sum % 10) == 0;
 }
 
+function isDateTodayOrLater (date) {
+    let now = new Date()
+    let userDate = new Date(date)
+    console.log (now)
+    return userDate <= now
+}
+
 q('#parking-form').addEventListener('submit', function(event) {
     event.preventDefault()
 
@@ -84,10 +91,12 @@ q('#parking-form').addEventListener('submit', function(event) {
 
     let dateField= q('#start-date-field')
     let dateInput=q("#start-date")
-    let date= dateInput.value
+    let dateText= dateInput.value
 
-    if (!date) {
+    if (!dateText) {
         markInvalid(dateField, 'Oops! Please fill in the date.')
+    } else if (isDateTodayOrLater(dateText)) {
+        markInvalid(dateField, 'Oops! Please fill in a future date.')
     } else {
         markValid(dateField)
     }
