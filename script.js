@@ -53,8 +53,10 @@ q('#parking-form').addEventListener('submit', function(event) {
 
     if (!carInput1 || !carInput2 || !carInput3) {
         markInvalid(carField, 'Oops! Please fill blanks.')
+    } else if (isNaN(carInput1) || carInput1 < 1900 || carInput1 > 2019) {
+        markInvalid(carField, 'Oops! Please fill in valid car year')
     } else {
-        markValid(carField)
+        markValid(carField)     
     }
 
     let dateField= q('#start-date-field')
