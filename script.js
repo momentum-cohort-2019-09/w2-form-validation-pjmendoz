@@ -71,7 +71,7 @@ q('#parking-form').addEventListener('submit', function(event) {
     let daysInput=q("#days")
     let days= daysInput.value
 
-    if (isNaN(days)) {
+    if (!days || isNaN(days) || days > 30) {
         markInvalid(daysField, 'Oops! Please fill in the number of days.')
     } else {
         markValid(daysField)
@@ -91,7 +91,7 @@ q('#parking-form').addEventListener('submit', function(event) {
     let cvvInput=q("#cvv")
     let cvv= cvvInput.value
 
-    if (!cvv) {
+    if (!cvv || cvv.length !== 3) {
         markInvalid(cvvField, 'Oops! Please fill in a valid CVV.')
     } else {
         markValid(cvvField)
