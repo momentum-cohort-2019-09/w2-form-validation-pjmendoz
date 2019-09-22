@@ -71,7 +71,7 @@ q('#parking-form').addEventListener('submit', function(event) {
     let daysInput=q("#days")
     let days= daysInput.value
 
-    if (!days) {
+    if (isNaN(days)) {
         markInvalid(daysField, 'Oops! Please fill in the number of days.')
     } else {
         markValid(daysField)
