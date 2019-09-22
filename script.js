@@ -31,6 +31,29 @@ function clearMsg () {
     }
 }
 
+function validateCardNumber(number) {
+    var regex = new RegExp("^[0-9]{16}$");
+    if (!regex.test(number))
+        return false;
+
+    return luhnCheck(number);
+}
+
+function luhnCheck(val) {
+    var sum = 0;
+    for (var i = 0; i < val.length; i++) {
+        var intVal = parseInt(val.substr(i, 1));
+        if (i % 2 == 0) {
+            intVal *= 2;
+            if (intVal > 9) {
+                intVal = 1 + (intVal % 10);
+            }
+        }
+        sum += intVal;
+    }
+    return (sum % 10) == 0;
+}
+
 q('#parking-form').addEventListener('submit', function(event) {
     event.preventDefault()
 
@@ -83,7 +106,7 @@ q('#parking-form').addEventListener('submit', function(event) {
     let ccInput=q("#credit-card")
     let cc= ccInput.value
 
-    if (!cc) {
+    if (!cc || isNaN(cc) || validateCardNumber(cc) === false) {
         markInvalid(ccField, 'Oops! Please fill in a valid Credit Card number.')
     } else {
         markValid(ccField)
